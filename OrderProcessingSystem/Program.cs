@@ -1,3 +1,5 @@
+using OrderProcessingSystem.Models;
+
 namespace OrderProcessingSystem
 {
     public class Program
@@ -8,6 +10,12 @@ namespace OrderProcessingSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Register your custom services for dependency injection
+            builder.Services.AddSingleton<IOrderProcessor, OrderProcessor>();
+            builder.Services.AddSingleton<INotificationService, EmailNotificationService>();
+            builder.Services.AddSingleton<IOrderValidator, OrderValidator>();
+            builder.Services.AddSingleton<OrderService>();
 
             var app = builder.Build();
 
